@@ -17,11 +17,9 @@ void MainWindow::setupUI()
     
     mainLayout = new QVBoxLayout(centralWidget);
     
-    // Create paint area
     paintArea = new PaintArea(this);
     mainLayout->addWidget(paintArea);
     
-    // Tool selection layout
     toolLayout = new QHBoxLayout();
     
     toolGroup = new QButtonGroup(this);
@@ -37,7 +35,7 @@ void MainWindow::setupUI()
     rectangleButton->setCheckable(true);
     ellipseButton->setCheckable(true);
     
-    pencilButton->setChecked(true); // Default tool
+    pencilButton->setChecked(true); 
     
     toolGroup->addButton(pencilButton, PaintArea::Pencil);
     toolGroup->addButton(lineButton, PaintArea::Line);
@@ -51,7 +49,6 @@ void MainWindow::setupUI()
     
     mainLayout->addLayout(toolLayout);
     
-    // Control layout
     controlLayout = new QHBoxLayout();
     
     colorButton = new QPushButton("Выбрать цвет", this);
@@ -77,14 +74,12 @@ void MainWindow::setupUI()
     
     mainLayout->addLayout(controlLayout);
     
-    // Connect signals and slots
     connect(toolGroup, SIGNAL(buttonClicked(int)), this, SLOT(onToolChanged(int)));
     connect(colorButton, &QPushButton::clicked, this, &MainWindow::onColorButtonClicked);
     connect(saveButton, &QPushButton::clicked, this, &MainWindow::onSaveButtonClicked);
     connect(clearButton, &QPushButton::clicked, this, &MainWindow::onClearButtonClicked);
     connect(penWidthSpinBox, SIGNAL(valueChanged(int)), paintArea, SLOT(setPenWidth(int)));
     
-    // Set initial tool
     paintArea->setTool(PaintArea::Pencil);
     paintArea->setPenColor(currentColor);
     paintArea->setPenWidth(penWidthSpinBox->value());
