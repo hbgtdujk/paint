@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
     mainwindow.ui
     canvas.cpp
     canvas.h
+    paintarea.cpp
+    paintarea.h
     ${TS_FILES}
 )
 
