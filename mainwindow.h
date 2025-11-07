@@ -2,17 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QButtonGroup>
-#include <QLabel>
-#include <QColorDialog>
-#include <QSpinBox>
-#include <QFileDialog>
-#include <QMessageBox>
 
-#include "paintarea.h"
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -22,36 +15,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void onColorButtonClicked();
-    void onSaveButtonClicked();
-    void onClearButtonClicked();
-    void onToolChanged(int tool);
-
 private:
-    void setupUI();
-
-    PaintArea *paintArea;
-    
-    QWidget *centralWidget;
-    QVBoxLayout *mainLayout;
-    QHBoxLayout *toolLayout;
-    QHBoxLayout *controlLayout;
-    
-    QButtonGroup *toolGroup;
-    QPushButton *pencilButton;
-    QPushButton *lineButton;
-    QPushButton *rectangleButton;
-    QPushButton *ellipseButton;
-    
-    QPushButton *colorButton;
-    QPushButton *saveButton;
-    QPushButton *clearButton;
-    
-    QSpinBox *penWidthSpinBox;
-    QLabel *colorLabel;
-    
-    QColor currentColor;
+    Ui::MainWindow *ui;
 };
 
 #endif // MAINWINDOW_H
