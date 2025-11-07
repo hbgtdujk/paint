@@ -12,7 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 
-set(TS_FILES painter_ru_RU.ts)
+set(TS_FILES
+    painter_ru_RU.ts
+)
 
 set(PROJECT_SOURCES
     main.cpp
@@ -27,16 +29,15 @@ set(PROJECT_SOURCES
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(painter
         MANUAL_FINALIZATION
+        WIN32
         ${PROJECT_SOURCES}
     )
-
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 else()
-    add_executable(painter ${PROJECT_SOURCES})
+    add_executable(painter WIN32 ${PROJECT_SOURCES})
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-# 👇 вот эта строка ключевая — добавляет текущую директорию в include-пути
 target_include_directories(painter PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(painter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
